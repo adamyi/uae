@@ -1,3 +1,5 @@
+# DEPREACTED, FOR SECEDU CTF INFRA
+
 {
   services: [
     {
