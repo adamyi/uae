@@ -16,19 +16,19 @@ ENV PATH="/usr/local/jython/bin:$PATH"
 COPY src/requirements.txt /
 RUN pip install -r /requirements.txt
 
-RUN mkdir /geegle
+RUN mkdir /chal
 
-COPY src /geegle/gae
+COPY src /chal/uae
 
-RUN javac /geegle/gae/java/org/geegle/gae/*.java
+RUN javac /chal/uae/java/com/adamyi/uae/*.java
 
-RUN mkdir /geegle/gae/WEB-INF/lib \
- && cp /usr/local/jython/jython.jar /geegle/gae/WEB-INF/lib
+RUN mkdir /chal/uae/WEB-INF/lib \
+ && cp /usr/local/jython/jython.jar /chal/uae/WEB-INF/lib
 
-WORKDIR /geegle/gae
+WORKDIR /chal/uae
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY tomcat/ROOT.xml /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml
 COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
 
-ENV JYTHONPATH "/geegle/gae/java"
+ENV JYTHONPATH "/chal/uae/java"

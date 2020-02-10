@@ -1,4 +1,4 @@
-# gae (Geegle App Engine)
+# uae (Unhackable App Engine)
 
 Like Amazon Lambda. Deploy your website without worrying about VM/containers.
 
@@ -15,21 +15,21 @@ Example deploy:
 ---
 urls:
   "/": |-
-    gae_rsp = gaeutils.make_response("Hello World")
+    uae_rsp = uaeutils.make_response("Hello World")
   "/ping": |-
-    gae_rsp = gaeutils.make_response("Pong")
+    uae_rsp = uaeutils.make_response("Pong")
   "/add": |-
     num_a = int(request['args'].get("a"))
     num_b = int(request['args'].get("b"))
-    gae_rsp = gaeutils.make_response("Answer is " + str(num_a + num_b))
+    uae_rsp = uaeutils.make_response("Answer is " + str(num_a + num_b))
   "/error": |-
-    gae_rsp = gaeutils.errorpage("Oops our server has fallen asleep")
+    uae_rsp = uaeutils.errorpage("Oops our server has fallen asleep")
   "/redirect": |-
-    gae_rsp = gaeutils.redirect("https://www.adamyi.com/")
+    uae_rsp = uaeutils.redirect("https://www.adamyi.com/")
   "/json": |-
-    gae_rsp = gaeutils.make_response(gaeutils.json_encode({"json": "is_easy"}))
+    uae_rsp = uaeutils.make_response(uaeutils.json_encode({"json": "is_easy"}))
 default_handler: |-
-  gae_rsp = gaeutils.errorpage("The requested URL %s was not found on this server." % request['path'], code=404)
+  uae_rsp = uaeutils.errorpage("The requested URL %s was not found on this server." % request['path'], code=404)
 ```
 
 ## Vulnerability
@@ -42,30 +42,30 @@ Could deploy functions to any domains due to wrong caching rules.
 Domain: example
 Path: helloworld
 
-Cache Key: example.apps.geegle.org/helloworld
+Cache Key: example.unhackable.app/helloworld
 
 **Hacker**
-Domain: example.apps.geegle.org/haha
+Domain: example.unhackable.app/haha
 Path: lmao
 
-Cache Key: example.apps.geegle.org/haha.apps.geegle.org/lmao
+Cache Key: example.unhackable.app/haha.unhackable.app/lmao
 
 **This would make XSS possible on all GAE apps**
 
 ## Payload
 
-Visit http://manage.apps.geegle.org:8056/edit?app=test1.apps.geegle.org:8056/haha
+Visit https://manage.unhackable.app/edit?app=test1.unhackable.app:8056/haha
 
 ```
 ---
 urls:
   "/test": |-
-    gae_rsp = gaeutils.make_response("hacked")
+    uae_rsp = uaeutils.make_response("hacked")
 default_handler: |-
-  gae_rsp = gaeutils.errorpage("The requested URL %s was not found on this server." % request['path'], code=404)
+  uae_rsp = uaeutils.errorpage("The requested URL %s was not found on this server." % request['path'], code=404)
 ```
 
-http://test1.apps.geegle.org:8056/haha.apps.geegle.org:8056/test becomes hacked
+https://test1.unhackable.app/haha.unhackable.app:8056/test becomes hacked
 
 ## author
 adamyi
