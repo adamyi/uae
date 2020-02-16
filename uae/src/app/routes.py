@@ -73,6 +73,7 @@ def edit():
     if "username" not in session:
         return redirect("/login")
     username = session["username"]
+    userapp = request.args.get('app')
     owner = mssc.get("owner/" + userapp)
     if owner == "":
         mssc.set("owner/" + userapp, username)
@@ -81,7 +82,6 @@ def edit():
             "You don't have permission to edit " + userapp +
             ".unhackable.app because you didn't create it.", "danger")
         return render_template("manage.html", username=username)
-    userapp = request.args.get('app')
     if not userapp:
         return error(400, message="wrong parameter")
     if request.method == "GET":
