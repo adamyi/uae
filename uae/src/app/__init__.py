@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 
 HOST = 'unhackable.app'
 SERVER_NAME = 'Unhackable App Engine'
@@ -13,6 +14,7 @@ class uaeFlask(Flask):
 
 app = uaeFlask(__name__)
 app.config['SERVER_NAME'] = HOST
+app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 from app import routes
 print("uae init")

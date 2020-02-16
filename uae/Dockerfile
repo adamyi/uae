@@ -20,6 +20,8 @@ RUN mkdir /chal
 
 COPY src /chal/uae
 
+RUN tar czvf /code.tgz /chal/uae
+
 RUN javac /chal/uae/java/com/adamyi/uae/*.java
 
 RUN mkdir /chal/uae/WEB-INF/lib \
@@ -30,5 +32,10 @@ WORKDIR /chal/uae
 RUN rm -rf /usr/local/tomcat/webapps/*
 COPY tomcat/ROOT.xml /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml
 COPY tomcat/server.xml /usr/local/tomcat/conf/server.xml
+COPY tomcat/keystore.jks /keystore.jks
 
 ENV JYTHONPATH "/chal/uae/java"
+
+COPY run.sh /run.sh
+COPY init.py /init.py
+CMD /run.sh

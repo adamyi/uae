@@ -6,7 +6,10 @@ To use this infra, you only need to submit short pieces of code for python funct
 
 The environment is sandboxed.
 
-**Feel free to write other services using this infra**
+## Jython
+
+Because of CPython's GIL lock, users can easily DOS the system by having a syscall that takes forever to run.
+We use Jython here to have true multithreading.
 
 ## How-To
 
@@ -36,8 +39,6 @@ default_handler: |-
 
 Could deploy functions to any domains due to wrong caching rules.
 
-**Please test if there are any other unintended vulns (user authentication is yet to add, main focus: bypass sandbox, DoS)**
-
 **Normal User**
 Domain: example
 Path: helloworld
@@ -54,7 +55,7 @@ Cache Key: example.unhackable.app/haha.unhackable.app/lmao
 
 ## Payload
 
-Visit https://manage.unhackable.app/edit?app=test1.unhackable.app:8056/haha
+Visit https://manage.unhackable.app/edit?app=example.unhackable.app/haha
 
 ```
 ---

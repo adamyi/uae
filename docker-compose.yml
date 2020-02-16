@@ -1,0 +1,18 @@
+version: '2'
+services:
+  uae:
+    build: ./uae
+    networks:
+      uaenet:
+    ports:
+    - "80:80"
+    - "443:443"
+    environment:
+      - "FLASK_SECRET_KEY=diofhauisdhfaio"
+      - "CTF_FLAG=FLAG{XXX}"
+  redis:
+    image: redis:latest
+    networks:
+      uaenet:
+networks:
+  uaenet:
