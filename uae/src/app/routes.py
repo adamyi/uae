@@ -8,6 +8,7 @@ from uaerunner import runCode, flattenRequest
 import uaeutils
 import random
 import string
+import os
 
 CACHE_EXPIRES = 300  # 5 min
 REQUEST_TIMEOUT = 3  # seconds
@@ -28,6 +29,7 @@ def error(code, message="That was an error. Please try again later.",
 
 
 @app.route('/')
+@app.route('/', subdomain='www')
 def landing():
     return render_template("landing.html")
 
@@ -127,6 +129,12 @@ def viewflag():
         return os.environ["CTF_FLAG"]
     else:
         return error(403, url + " does not contain " + session["otp"])
+
+@app.route('/<path:path>', subdomain="manage", methods=['GET', 'POST'])
+@app.route('/<path:path>', subdomain="www", methods=['GET', 'POST'])
+@app.route('/<path:path>', methods=['GET', 'POST'])
+def reserved404(path):
+    return error(404, "page not found")
 
 
 @app.route(
