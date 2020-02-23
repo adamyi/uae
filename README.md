@@ -1,5 +1,13 @@
 # uae (Unhackable App Engine)
 
+```
+I've always been annoyed by the cumbersome release and deploy process -- installing correct versions of dependencies, scaling,
+load balancing, etc. are just too much for me. My friend recommended this serverless platform that claims to be "unhackable."
+I doubt it though...
+```
+
+Flag: `sectalks{1_7h0ugh7_0n1y_5ql_15_1nj3ctabl3}`
+
 Like Amazon Lambda. Deploy your website without worrying about VM/containers.
 
 To use this infra, you only need to submit short pieces of code for python functions, see the following example.
@@ -73,10 +81,6 @@ default_handler: |-
 https://otp.unhackable.app/adamyi.unhackable.app/ becomes `uh4SGbRbgQCPHnieb2jM1U3BsYZniZmD`
 
 Use this URL for https://manage.unhackable.app/flag to get flag.
-
-## TODO
-
-Better documentation and examples on unhackable.app so that users know what UAE is and how to deploy their apps
 
 ## author
 adamyi

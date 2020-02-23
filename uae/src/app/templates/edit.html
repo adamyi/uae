@@ -5,6 +5,20 @@
 <button id="submit" name="submit" type="submit" class="btn btn-lg btn-default">Update</button>
 </form>
 
+<h4>How-To</h4>
+You supply a YAML file containing Python code for {{userapp}}.unhackable.app
+
+The YAML file contains multiple urls/endpoints and a default handler. If no url is matched,
+the default handler will be used (usually display a 404 page).
+
+For each url, you have access to request dictionary, containing method, cookies, args, form, json,
+host, host_url, path, full_path, url, base_url, url_root, headers, remote_addr, and data.
+
+You also have access to uaeutils, containing some functions to make it easier for you to create response,
+including make_response, errorpage, redirect, json_encode, and json_decode, as shown in the following example.
+
+You will need to store your response in uae_rsp variable.
+
 <h4>Example</h4>
 <pre>
 ---

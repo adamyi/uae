@@ -9,7 +9,7 @@ services:
     - "443:443"
     environment:
       - "FLASK_SECRET_KEY=diofhauisdhfaio"
-      - "CTF_FLAG=FLAG{XXX}"
+      - "CTF_FLAG=sectalks{1_7h0ugh7_0n1y_5ql_15_1nj3ctabl3}"
   redis:
     image: redis:latest
     networks:
