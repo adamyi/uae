@@ -28,7 +28,7 @@ def flattenRequest(request):
         "url": request.url,
         "base_url": request.base_url,
         "url_root": request.url_root,
-        "headers": request.headers,
+        "headers": request.headers.to_list(),
         "remote_addr": request.remote_addr,
         "data": request.data
     }

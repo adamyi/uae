@@ -11,10 +11,6 @@ class MSSClient():
         if ret is None:
             return ""
         return ret.decode("utf-8")
-        return requests.get(
-            self.host + "/" + key, headers={
-                "X-Geegle-JWT": self.jwt
-            }).text
 
     def set(self, key, value, expires=None):
         if expires:

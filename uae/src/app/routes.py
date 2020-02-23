@@ -165,12 +165,20 @@ def runapp(path, userapp):
             return error(502, message="The server didn't return anything.")
         if type(result) == unicode:
             return error(500, debug=result.encode('utf-8'))
+        if type(result) != dict:
+            return error(500, message="Please use uaeutils to generate uae_rsp")
+        if type(result['body']) != str:
+            return error(500, message="Body must be str")
+        if type(result['status']) != int:
+            return error(500, message="Status must be int")
         if result['errpage']:
             rsp = make_response(
                 error(result['status'], message=result['body']))
         else:
             rsp = make_response(result['body'], result['status'])
         for k, v in result['headers'].items():
+            if type(k) != str or type(v) != str:
+                return error(500, message="Header K/Vs must be str")
             rsp.headers[k] = v
         return rsp
     except Exception as e:

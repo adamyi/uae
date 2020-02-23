@@ -70,7 +70,6 @@ Visit https://manage.unhackable.app/edit?app=otp.unhackable.app/adamyi
 
 ```
 ---
----
 urls:
   "/": |-
     uae_rsp = uaeutils.make_response("uh4SGbRbgQCPHnieb2jM1U3BsYZniZmD")
